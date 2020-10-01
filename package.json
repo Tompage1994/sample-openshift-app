@@ -6,7 +6,7 @@
   "scripts": {
     "build:dev": "mkdir dist && echo '<h1>HELLO DEVELOPMENT</h1>' > dist/index.html ",
     "build:stg": "mkdir dist && echo '<h1>HELLO STAGING</h1>' > dist/index.html ",
-    "build:prd": "mkdir dist && echo '<h1>HELLO PRODUCTION</h1>' > dist/index.html "
+    "build:prod": "mkdir dist && echo '<h1>HELLO PRODUCTION</h1>' > dist/index.html "
   },
   "repository": {
     "type": "git",
