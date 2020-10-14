@@ -8,7 +8,7 @@ spec:
   replicas: 1
   revisionHistoryLimit: 3
   selector:
-    name: {{ .Values.app_name }}
+    app: {{ .Values.app_name }}
   strategy:
     activeDeadlineSeconds: 21600
     resources: {}
