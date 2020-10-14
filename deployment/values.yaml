@@ -1,0 +1,6 @@
+app_name: sample-openshift-app
+replicas: 1
+# build info not used atm
+# Docker deets
+# image_repository: quay.io
+image_namespace: example
