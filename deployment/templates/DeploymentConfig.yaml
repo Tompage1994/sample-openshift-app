@@ -1,13 +1,14 @@
 apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
-  labels:
   name: {{ .Values.app_name }}
-spec:
-  replicas: {{ .Values.replicas }}
-  revisionHistoryLimit: 10
-  selector:
+  labels:
     app: {{ .Values.app_name }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    name: {{ .Values.app_name }}
   strategy:
     activeDeadlineSeconds: 21600
     resources: {}
@@ -20,19 +21,19 @@ spec:
     type: Rolling
   template:
     metadata:
+      creationTimestamp:
       labels:
-        app: {{ .Values.app_name }}
+        name: {{ .Values.app_name }}
     spec:
       containers:
       - image: "{{ .Values.app_name }}:latest"
         imagePullPolicy: Always
-        name: "{{ .Values.app_name }}"
+        name: {{ .Values.app_name }}
         ports:
         - containerPort: 8080
           protocol: TCP
         resources: {}
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
+        terminationMessagePath: "/dev/termination-log"
         readinessProbe:
           httpGet:
             path: /
@@ -41,16 +42,7 @@ spec:
           timeoutSeconds: 1
       dnsPolicy: ClusterFirst
       restartPolicy: Always
-      schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
   test: false
-  triggers:
-  - type: "ImageChange"
-    imageChangeParams:
-      automatic: true
-      from:
-        kind: "ImageStreamTag"
-        name: "{{ .Values.app_name }}:latest"
-      containerNames:
-        - "{{ .Values.app_name }}"
+  triggers: []
