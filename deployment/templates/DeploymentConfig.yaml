@@ -45,4 +45,5 @@ spec:
       securityContext: {}
       terminationGracePeriodSeconds: 30
   test: false
-  triggers: []
+  triggers:
+    - type: "ConfigChange"
